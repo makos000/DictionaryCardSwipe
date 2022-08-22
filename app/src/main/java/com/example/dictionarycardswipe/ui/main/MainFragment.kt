@@ -57,21 +57,25 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
         var list = mutableListOf<String>()
 
+        val arrayAdapter = ArrayAdapter(requireActivity(),R.layout.card_item,R.id.item_TV,list)
         //viewModel.nukeData()
 
         viewModel.readDatabase.observe(requireActivity()) {
             for (item in it){
 
                 list.add(item.acronymEntity[0].sf)
+                arrayAdapter.notifyDataSetChanged()
             }
         }
 
-        val arrayAdapter = ArrayAdapter(requireActivity(),R.layout.card_item,R.id.item_TV,list)
+
+
 
         flingAdapterView.adapter = arrayAdapter
 
         flingAdapterView.setFlingListener(object : onFlingListener {
             override fun removeFirstObjectInAdapter() {
+                list.add(list[0])
                 list.removeAt(0)
                 arrayAdapter.notifyDataSetChanged()
             }
@@ -98,7 +102,6 @@ class MainFragment: Fragment(R.layout.fragment_main) {
             } else {
                 parentFragmentManager.beginTransaction().detach(this).attach(this).commit();
             }
-
         }
 
         binding.button2.setOnClickListener(){

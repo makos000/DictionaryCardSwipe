@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/editTextV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:ems="10"
         android:imeOptions="actionSearch"
         android:hint="Enter Acronym"
@@ -26,7 +26,10 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:textColor="@color/pink3"
+        android:background="@color/yellow1"
+        android:fadeScrollbars="false"
         android:maxLines="5"
+        android:lines="5"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
         android:text="TextView"
@@ -50,15 +53,16 @@
         android:id="@+id/Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ACRONYM FINDER"
         android:background="@color/pink1"
-        android:textColor="@color/yellow1"
         android:gravity="center"
         android:paddingVertical="20dp"
+        android:text="ACRONYM FINDER"
+        android:textColor="@color/yellow1"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/swipeID"
