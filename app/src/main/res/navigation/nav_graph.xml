@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.dictionarycardswipe.ui.main.MainFragment"
-        android:label="MainFragment" >
+        android:label="Search For Acronym">
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.dictionarycardswipe.ui.detail.DetailFragment"
-        android:label="DetailFragment" >
+        android:label="Acronym Details">
         <action
             android:id="@+id/action_detailFragment_to_mainFragment"
             app:destination="@id/mainFragment" />

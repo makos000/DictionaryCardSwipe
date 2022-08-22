@@ -1,5 +1,6 @@
 package com.example.dictionarycardswipe.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,18 +20,23 @@ class MainViewModel @Inject constructor(val repoInterface: RepoInterface, val ac
     val _data: MutableLiveData<Model> = MutableLiveData(Model())
     var data: String = ""
 
-    var acronymList = mutableSetOf<String>()
-
     fun getData(string: String){
 
         CoroutineScope(Dispatchers.IO).launch {
 
             val response = repoInterface.getSF(string)
             if(response.isSuccessful){
-                response.body().let{
-                    insertIntoDatabase(it!!)
-                    _data.postValue(it)
+
+                if (response.body()!!.isNotEmpty()){
+                    response.body().let{
+                        insertIntoDatabase(it!!)
+                        _data.postValue(it)
+                    }
                 }
+
+            }
+            else{
+                Log.i("Response", "Api Response not successful")
             }
         }
     }

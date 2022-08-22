@@ -15,6 +15,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.dictionarycardswipe.R
 import com.example.dictionarycardswipe.databinding.FragmentMainBinding
+import com.example.dictionarycardswipe.models.Model
+import com.example.dictionarycardswipe.models.ModelItem
 import com.example.dictionarycardswipe.ui.MainViewModel
 import com.example.dictionarycardswipe.util.CheckInternet
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
@@ -55,8 +57,11 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
         var list = mutableListOf<String>()
 
+        //viewModel.nukeData()
+
         viewModel.readDatabase.observe(requireActivity()) {
             for (item in it){
+
                 list.add(item.acronymEntity[0].sf)
             }
         }
@@ -106,7 +111,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
             Toast.makeText(requireActivity(), "item clicked " + any.toString(), Toast.LENGTH_SHORT).show()
 
-            var bundle_data = mutableListOf<String>()
+            var bundle_data = mutableListOf<ModelItem>()
 
             viewModel.readDatabase.observe(this.requireActivity()) {
                 if (it.isNotEmpty()) {
@@ -114,7 +119,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
                         if(it[0].acronymEntity[0].sf.isNotEmpty() &&
                             any.toString() == acronym.acronymEntity[0].sf){
 
-                            bundle_data.add(acronym.acronymEntity[0].lfs[0].lf)
+                            bundle_data.add(ModelItem(acronym.acronymEntity[0].lfs, acronym.acronymEntity[0].sf))
 
                         }
                     }
@@ -170,9 +175,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
                         }
                     }
                     else{
-                        binding.SourceText.text = "Online results for: " + editV.text.toString().uppercase()
                         getDataSetText(viewModel,editV)
-
                     }
                     return true
                 }
@@ -190,8 +193,10 @@ class MainFragment: Fragment(R.layout.fragment_main) {
             if (it.isNotEmpty()) {
 
                 for(acronym in it){
-                    if(acronym.acronymEntity[0].sf.isNotEmpty() && editText == acronym.acronymEntity[0].sf){
-                        myBool = true
+                    if (acronym.acronymEntity.isNotEmpty()){
+                        if(acronym.acronymEntity[0].sf.isNotEmpty() && editText == acronym.acronymEntity[0].sf){
+                        myBool = true}
+
                     }
                 }
             } else {
@@ -207,8 +212,14 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         editV: EditText
     ) {
         var tempText = ""
+        binding.textView2.text = tempText
+        binding.SourceText.text = "No data found"
+        var internet = CheckInternet()
 
+        if (internet.internetIsConnected()){
             if (editV.text.toString() != "") {
+                viewModel._data.postValue(Model())
+
                 viewModel.getData(editV.text.toString().uppercase())
 
                 viewModel._data.observe(requireActivity()) {
@@ -220,6 +231,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
                         }
                         viewModel.data = tempText
                         binding.textView2.text = viewModel.data
+                        binding.SourceText.text = "Online results for: " + editV.text.toString().uppercase()
                         if(it[0].lfs[0].lf.isNotEmpty()){
                             Toast.makeText(requireActivity(),"data from API", Toast.LENGTH_SHORT).show()
                         }
@@ -232,6 +244,10 @@ class MainFragment: Fragment(R.layout.fragment_main) {
                     }
                 }
             }
+        }
+        else{}
+
+
 
 
 

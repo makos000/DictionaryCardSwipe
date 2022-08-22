@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient2">
 
     <EditText
         android:id="@+id/editTextV"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
+        android:textColor="@color/pink3"
         android:maxLines="5"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
@@ -37,17 +39,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textColor="@color/pink3"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextV" />
 
     <TextView
         android:id="@+id/Header"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ACRONYM FINDER"
-        android:padding="20dp"
+        android:background="@color/pink1"
+        android:textColor="@color/yellow1"
+        android:gravity="center"
+        android:paddingVertical="20dp"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +63,7 @@
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/swipeID"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
