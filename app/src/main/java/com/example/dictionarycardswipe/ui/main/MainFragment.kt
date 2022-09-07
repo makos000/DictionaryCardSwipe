@@ -62,10 +62,9 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
         viewModel.readDatabase.observe(requireActivity()) {
             for (item in it){
-
                 list.add(item.acronymEntity[0].sf)
-                arrayAdapter.notifyDataSetChanged()
             }
+            arrayAdapter.notifyDataSetChanged()
         }
 
 
@@ -102,12 +101,11 @@ class MainFragment: Fragment(R.layout.fragment_main) {
             } else {
                 parentFragmentManager.beginTransaction().detach(this).attach(this).commit();
             }
+
         }
 
         binding.button2.setOnClickListener(){
-
             viewModel.nukeData()
-
         }
 
         flingAdapterView.setOnItemClickListener { i, any ->
@@ -202,8 +200,6 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
                     }
                 }
-            } else {
-                //throw Throwable("No data")
             }
         }
         return myBool
@@ -238,17 +234,10 @@ class MainFragment: Fragment(R.layout.fragment_main) {
                         if(it[0].lfs[0].lf.isNotEmpty()){
                             Toast.makeText(requireActivity(),"data from API", Toast.LENGTH_SHORT).show()
                         }
-                        else{
-                            //Toast.makeText(requireActivity(),"No result from API", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    else{
-                        Toast.makeText(requireActivity(),"No result from API", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-        else{}
 
 
 
