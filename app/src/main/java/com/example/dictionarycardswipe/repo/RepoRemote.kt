@@ -2,7 +2,6 @@ package com.example.dictionarycardswipe.repo
 
 import com.example.dictionarycardswipe.api.ApiDetails
 import com.example.dictionarycardswipe.models.Model
-import com.example.dictionarycardswipe.room.AcronymDao
 import retrofit2.Response
 import javax.inject.Inject
 

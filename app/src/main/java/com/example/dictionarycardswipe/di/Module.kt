@@ -6,7 +6,6 @@ import com.example.dictionarycardswipe.api.ApiDetails
 import com.example.dictionarycardswipe.api.ApiReference
 import com.example.dictionarycardswipe.repo.RepoRemote
 import com.example.dictionarycardswipe.repo.RepoInterface
-import com.example.dictionarycardswipe.room.AcronymDao
 import com.example.dictionarycardswipe.room.AcronymDatabase
 import com.google.gson.Gson
 import dagger.Module
@@ -39,11 +38,12 @@ class Module {
     @Provides
     fun okHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .retryOnConnectionFailure(false)
-            .build();
+            .build()
 
     @Provides
     fun retrofitBuilder(gson: Gson, okHttpClient: OkHttpClient): Retrofit =

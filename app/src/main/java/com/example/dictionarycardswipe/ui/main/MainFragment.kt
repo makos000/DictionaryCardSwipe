@@ -9,9 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.dictionarycardswipe.R
 import com.example.dictionarycardswipe.databinding.FragmentMainBinding
@@ -22,7 +20,6 @@ import com.example.dictionarycardswipe.util.CheckInternet
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import com.lorentzos.flingswipe.SwipeFlingAdapterView.onFlingListener
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
 
 
 @AndroidEntryPoint
@@ -41,9 +38,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         val viewModel by viewModels<MainViewModel>()
         binding = FragmentMainBinding.bind(view)
 
-        var text = ""
-        var editV = binding.editTextV
-        var internet = CheckInternet()
+        val editV = binding.editTextV
 
         binding.textView2.text = viewModel.data
 
@@ -55,7 +50,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
         flingAdapterView = binding.swipeID
 
-        var list = mutableListOf<String>()
+        val list = mutableListOf<String>()
 
         val arrayAdapter = ArrayAdapter(requireActivity(),R.layout.card_item,R.id.item_TV,list)
         //viewModel.nukeData()
@@ -96,10 +91,10 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         binding.button.setOnClickListener(){
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                parentFragmentManager.beginTransaction().detach(this).commitNow();
-                parentFragmentManager.beginTransaction().attach(this).commitNow();
+                parentFragmentManager.beginTransaction().detach(this).commitNow()
+                parentFragmentManager.beginTransaction().attach(this).commitNow()
             } else {
-                parentFragmentManager.beginTransaction().detach(this).attach(this).commit();
+                parentFragmentManager.beginTransaction().detach(this).attach(this).commit()
             }
 
         }
@@ -112,7 +107,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
             Toast.makeText(requireActivity(), "item clicked " + any.toString(), Toast.LENGTH_SHORT).show()
 
-            var bundle_data = mutableListOf<ModelItem>()
+            val bundle_data = mutableListOf<ModelItem>()
 
             viewModel.readDatabase.observe(this.requireActivity()) {
                 if (it.isNotEmpty()) {
@@ -213,7 +208,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         var tempText = ""
         binding.textView2.text = tempText
         binding.SourceText.text = "No data found"
-        var internet = CheckInternet()
+        val internet = CheckInternet()
 
         if (internet.internetIsConnected()){
             if (editV.text.toString() != "") {

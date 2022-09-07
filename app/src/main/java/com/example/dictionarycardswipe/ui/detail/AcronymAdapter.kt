@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.dictionarycardswipe.R
 import com.example.dictionarycardswipe.models.Lf
-import com.example.dictionarycardswipe.models.ModelItem
 import kotlinx.android.synthetic.main.recycler_layout.view.*
 
 class AcronymAdapter(var items: MutableList<Lf>, val context: Context): RecyclerView.Adapter<AcronymAdapter.RecyclerViewHolder>() {
@@ -20,7 +17,7 @@ class AcronymAdapter(var items: MutableList<Lf>, val context: Context): Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        var curItem = items[position]
+        val curItem = items[position]
         holder.itemView.apply {
             freqV.text = curItem.freq.toString()
             definitionV.text = curItem.lf
